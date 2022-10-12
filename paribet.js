@@ -4,9 +4,11 @@ const cheerio = require('cheerio');
 const scrapeParibet = async () => {
   const targetUrl = 'https://paribet.ug/'
   const rawData = await scrape(targetUrl)
-  const data = rawData.map(dataset => {
-    // console.log(dataset)
-    getValues(dataset)
+  const resultCount = rawData?.length
+  const arr = [...rawData]
+  const data = arr.map(stringSet => {
+    const value = getValues(stringSet)
+    return value
   })
   // console.log('data', data)
 
@@ -56,9 +58,13 @@ async function scrape(Url) {
   }
 }
 
-return {
+const dataExport = {
+  target: targetUrl,
+  resultCount: resultCount,
   data: data
 }
+
+return data ? dataExport : 'Scraping...'
 };
 
 // * invoke the function
