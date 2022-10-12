@@ -61,11 +61,13 @@ async function scrape(Url) {
 const dataExport = {
   target: targetUrl,
   resultCount: resultCount,
-  data: data
+  results: data
 }
 
 return data ? dataExport : 'Scraping...'
 };
 
 // * invoke the function
-scrapeParibet().then(data => console.log(data))
+scrapeParibet().then(res => console.log(res.target, res.resultCount, '...results'))
+
+// => Next: more odd types
